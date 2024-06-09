@@ -20,9 +20,7 @@ const reactionSchema = new Schema(
     createdAt: {
         type: Date,
         default: Date.now,
-        get: function(){
-            return dayjs(this.createdAt).format('MM/DD/YYYY, hh:mm A');
-        }
+        get: setFormat
     }
   },
   {
@@ -31,5 +29,10 @@ const reactionSchema = new Schema(
     },
   }
 );
+
+
+function setFormat(date) {
+    return dayjs(date).format('MM/DD/YYYY, hh:mm A');
+}
 
 module.exports = reactionSchema;
