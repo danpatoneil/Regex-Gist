@@ -1,4 +1,4 @@
-const { Schema, model } = require('mongoose');
+const { Schema, Types } = require('mongoose');
 const dayjs = require('dayjs');
 
 const reactionSchema = new Schema(
@@ -18,13 +18,14 @@ const reactionSchema = new Schema(
       required: true,
     },
     createdAt: {
+        type: Date,
+        default: Date.now,
         get: function(){
             return dayjs(this.createdAt).format('MM/DD/YYYY, hh:mm A');
         }
     }
   },
   {
-    timestamps: true,
     toJSON: {
       getters: true,
     },

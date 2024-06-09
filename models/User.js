@@ -13,7 +13,7 @@ const userSchema = new Schema(
       required: true,
       unique: true,
       trim: true,
-      // regex to match email
+      lowercase: true,
       match: [/^([a-z0-9_\.-]+)@([\da-z\.-]+)\.([a-z\.]{2,6})$/, 'Please enter a valid email address']
     },
     thoughts: [
@@ -36,7 +36,7 @@ const userSchema = new Schema(
   }
 );
 
-userSchema.virtual(friendCount).get(function() {
+userSchema.virtual('friendCount').get(function() {
     return this.friends.length;
 });
 

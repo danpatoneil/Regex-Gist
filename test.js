@@ -1,24 +1,12 @@
-const now  = Date.now();
-let counter = 0;
-const dayjs = require('dayjs');
+const {generateUserList} = require('./utils/data');
 
-function showDate(date){
-    // let hours = date.getHours();
-    // let AMPM = 'AM';
-    // if(hours<12){
-    //     if(hours==0){hours=12;}
-    // }else{
-    //     AMPM='PM';
-    //     if(hours!=12){hours = hours-12}
-    // }
-    // return `${date.getMonth()+1}/${date.getDate()}/${date.getFullYear()}, ${hours}:${date.getMinutes()} ${AMPM}`;
-    return dayjs(date).format('MM/DD/YYYY, hh:mm A');
-}
+const list = generateUserList()
+const emails = list.map(obj => obj.email);
+console.log(emails)
 
-const timer = setInterval(myTimer, 1);
-
-function myTimer() {
-    console.log(showDate(now));
-  counter ++;
-  if(counter==5)clearInterval(timer)
+for (const user of list) {
+    const regex = /^([a-z0-9_\.-]+)@([\da-z\.-]+)\.([a-z\.]{2,6})$/;
+    let passed = false;
+    if(regex.test(user.email)) passed=true;
+    console.log(`${user.email} passed is ${passed}`)
 }
