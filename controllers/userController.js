@@ -4,7 +4,7 @@ const { Thought, User } = require("../models");
 module.exports = {
   async getUsers(req, res) {
     try {
-      const users = await User.find().select("-__v");
+      const users = await User.find().select('-__v');
       return res.status(200).json(users);
     } catch (error) {
       return res.status(500).json(error);
@@ -12,9 +12,11 @@ module.exports = {
   },
   async getSingleUser(req, res) {
     try {
-      const user = await User.findOne({ _id: req.params.userId }).select(
-        "-__v"
-      );
+      const user = await User.findOne({ _id: req.params.userId })
+        // populate the thoughts list
+        .populate({path: 'thoughts', select:'-__v'})
+        //populatethe friends list
+        .populate({path:'friends', select:'_id name email friends'});
       return res.status(200).json(user);
     } catch (error) {
       // if the error was "CastError" then the record was not found because the user ID was invalid and the response should be a 404
@@ -28,6 +30,7 @@ module.exports = {
   },
   async createUser(req, res) {
     try {
+        //need to have a valid name and email
       const user = await User.create(req.body);
       return res.status(200).json(user);
     } catch (error) {

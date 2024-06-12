@@ -19,19 +19,24 @@ const userSchema = new Schema(
     thoughts: [
         {
             type: Schema.Types.ObjectId,
-            ref: 'Thought'
+            ref: 'thought'
         }
     ],
     friends: [
         {
             type: Schema.Types.ObjectId,
-            ref: 'User'
+            ref: 'user'
         }]
   },
   {
     toJSON: {
       virtuals: true,
       getters: true,
+      //code from the Xpert Assistant to stop mongoose from generating an "id" field that is redundant and confusing
+      transform: function (doc, ret) {
+        // Remove the 'id' virtual field from the JSON output
+        delete ret.id;
+      }
     },
   }
 );

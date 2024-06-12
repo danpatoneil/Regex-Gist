@@ -25,6 +25,11 @@ const thoughtSchema = new Schema(
     toJSON: {
       getters: true,
       virtuals: true,
+      //code from the Xpert Assistant to stop mongoose from generating an "id" field that is redundant and confusing
+      transform: function (doc, ret) {
+        // Remove the 'id' virtual field from the JSON output
+        delete ret.id;
+      }
     },
   }
 );
@@ -37,6 +42,6 @@ thoughtSchema.virtual('reactionCount').get(function() {
   return this.reactions.length;
 });
 
-const Thought = model('Thought', thoughtSchema);
+const Thought = model('thought', thoughtSchema);
 
 module.exports = Thought;
