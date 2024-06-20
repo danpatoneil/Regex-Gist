@@ -38,7 +38,7 @@ const thoughtData = await Thought.insertMany(thoughts);
 // add thoughts to friends
 for (const thought of thoughtData) {
     // console.log(thought.username);
-    const userItem = await User.findOne({name:thought.username})
+    const userItem = await User.findOne({username:thought.username})
     // console.log(userItem)
     userItem.thoughts.push(thought._id);
     await userItem.save();
@@ -51,7 +51,7 @@ for (const user of userData) {
     do {
         const friend = getRandomArrItem(userData)
         // console.log(friend.name);
-        if(friend.name!=user.name) friends.push(friend);
+        if(friend.username!=user.username) friends.push(friend);
     } while (friends.length<=2);
     // console.log(friends);
     for (const friend of friends) {

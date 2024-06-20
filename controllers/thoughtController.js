@@ -30,7 +30,7 @@ module.exports = {
   async createThought(req, res) {
     try {
       //find user by username
-      const user = await User.findOne({ name: req.body.username });
+      const user = await User.findOne({ username: req.body.username });
       // if we found a user, then we can create the thought and attach it to the user's thoughts array
       if (user) {
         //create thought item
@@ -57,7 +57,7 @@ module.exports = {
         _id: req.params.thoughtId,
       });
       //get the user that owns the thought
-      const user = await User.findOne({ name: thought.username });
+      const user = await User.findOne({ username: thought.username });
       if (user) {
         //remove the thought from the user's thoughts list
         user.thoughts.splice(user.thoughts.indexOf(thought._id), 1);

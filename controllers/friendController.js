@@ -62,7 +62,7 @@ module.exports = {
       }else{return res.status(404).json({message:'User not found in friends list'})}
       // return that friend was removed
       return res.status(200).json({
-        message: `friend ${req.params.friendId} remove from user ${user.name}`,
+        message: `friend ${req.params.friendId} remove from user ${user.username}`,
       });
     } catch (error) {
       // if the error was "CastError" then the record was not found because the user ID was invalid and the response should be a 404

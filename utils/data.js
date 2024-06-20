@@ -81,9 +81,9 @@ const users = [
   const generateUserList = () => {
     const userList = [];
     const emailLists= emails;
-    for (const name of users) {
+    for (const username of users) {
         userList.push({
-            name,
+            username,
             email: emailLists.pop()
         })
     }

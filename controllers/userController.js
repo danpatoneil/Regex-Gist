@@ -16,7 +16,7 @@ module.exports = {
         // populate the thoughts list
         .populate({path: 'thoughts', select:'-__v'})
         //populatethe friends list
-        .populate({path:'friends', select:'_id name email friends'});
+        .populate({path:'friends', select:'_id username email friends'});
       return res.status(200).json(user);
     } catch (error) {
       // if the error was "CastError" then the record was not found because the user ID was invalid and the response should be a 404

@@ -8,7 +8,7 @@ module.exports = {
       //if thought not found, return 404
       if(!thought) return res.status(404).json({message:'Thought not found'});
       //find user
-      const user = await User.findOne({name:req.body.username});
+      const user = await User.findOne({username:req.body.username});
       //if user not found, return 404
       if(!user) return res.status(404).json({message:'No user with specified username found'});
       //add reaction object to thought
@@ -37,7 +37,7 @@ module.exports = {
       // if thought not found return "thought not found"
       if(!thought) return res.status(404).json({message:'Thought not found'});
       //find reaction index within thought's reactions array
-      const reactionIndex = thought.reactions.findIndex(reaction => reaction.reactionId==req.body.reactionId);
+      const reactionIndex = thought.reactions.findIndex(reaction => reaction.reactionId==req.params.reactionId);
       //if reaction index not found, return `reaction not found within thought`
       if(reactionIndex==-1) return res.status(404).json({message:'Reaction not found in thought'});
       //splice out of array

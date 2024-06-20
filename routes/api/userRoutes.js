@@ -18,7 +18,7 @@ router.route('/').get(getUsers).post(createUser);
 // /api/users/:userId
 router.route('/:userId').get(getSingleUser).delete(deleteUser).put(updateUser);
 // {
-//     "name":"abcdefg",
+//     "username":"abcdefg",
 //     "email":"abcdefg@example.com"
 //     OPTIONAL "thoughts": [""], //thought _id's
 //     OPTIONAL "friends" : [""] //user _id's, not the same as the userId
